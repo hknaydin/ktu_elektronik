@@ -1,0 +1,35 @@
+ Bir Makefile aslında işlemlerin nasıl yapılacağını gösteren kural tanımlamalarından oluşmaktadır. Genel olarak dosyanın biçimi aşağıdaki gibidir:
+
+hedef: bağımlılıklar
+<TAB> komut
+<TAB> komut
+<TAB> ...
+Diğer kurala geçmeden bir boş satır
+...
+
+Burada en sık yapacağımız hata <TAB> tuşuna basmayı unutmak olacaktır. Makefile dosyasını hazırladığınız metin düzenleyiciden kaynaklanan bir sorun da olabilir. En iyisi emacs kullanarak makefile-mode ile yazmaktır, böylece hata yapma olasılığınız oldukça azalacaktır. 
+#####################################################################################
+CC                 = gcc
+CFLAGS             = -pthread
+OBJ                = test.o
+
+test: test.o
+	$(CC) -o test main.c
+
+test.o: main.c
+	$(CC) -c main.c
+
+
+
+
+
+clean:
+	rm -f *.o $(TARGET) $(OBJ)
+
+install: test
+	cp test /home/mavialp/Desktop/cdersleri/ders1/derleme
+
+#####################################################################################
+
+Tablar çok önemli
+
