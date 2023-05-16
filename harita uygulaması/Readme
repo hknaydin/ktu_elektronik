@@ -1,0 +1,1 @@
+Bu projede dosyadan koordianat okunup, struct dizisine atanmaktadır.Daha sonra ise kulllanıcıdan scanf ile koordinat değerleri alınıp uzaklık hesaplamaları yapılarak belirlenen mesafelere göre maksimum magaza sayısı bulunmaktadır.
