@@ -1,0 +1,8 @@
+#harita uygulaması
+1.magaza 4,6
+2.magaza 5,7
+3.magaza 7,8
+4.magaza 12,13
+5.magaza 14,45
+6.magaza 14,67
+7.magaza 14.34, 45.23
