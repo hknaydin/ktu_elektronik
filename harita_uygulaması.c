@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define MAX_MAGAZA_ 1000
 typedef struct {
     float x;
     float y;
 } Coordinate;
 
 int main() {
-    Coordinate* magazeler = NULL;
+    Coordinate* magazalar = NULL;
     int magazaSayisi = 0;
 
     FILE* dosya = fopen("koordinatlar.txt", "r");
@@ -17,20 +18,20 @@ int main() {
         return 1;
     }
 
-    char satir[100];
+    char satir[MAX_MAGAZA_];
     while (fgets(satir, sizeof(satir), dosya)) {
         if (satir[0] != '#') { // Yorum satırını atla
             magazaSayisi++;
-            Coordinate* temp = realloc(magazeler, magazaSayisi * sizeof(Coordinate));
+            Coordinate* temp = realloc(magazalar, magazaSayisi * sizeof(Coordinate));
             if (temp == NULL) {
                 printf("Bellek hatasi.");
-                free(magazeler);
+                free(magazalar);
                 fclose(dosya);
                 return 1;
             }
-            magazeler = temp;
+            magazalar = temp;
 
-            sscanf(satir, "%*d.magaza %f,%f", &magazeler[magazaSayisi - 1].x, &magazeler[magazaSayisi - 1].y);
+            sscanf(satir, "%*d.magaza %f,%f", &magazalar[magazaSayisi - 1].x, &magazalar[magazaSayisi - 1].y);
         }
     }
 
@@ -52,7 +53,7 @@ int main() {
     float* mesafeler = malloc(mesafeSayisi * sizeof(float));
     if (mesafeler == NULL) {
         printf("Bellek hatasi.");
-        free(magazeler);
+        free(magazalar);
         return 1;
     }
 
@@ -65,8 +66,8 @@ int main() {
     for (int i = 0; i < mesafeSayisi; i++) {
         int maksimumMagazaSayisi = 0;
         for (int j = 0; j < magazaSayisi; j++) {
-            float dx = magazeler[j].x - kullaniciKoordinat.x;
-            float dy = magazeler[j].y - kullaniciKoordinat.y;
+            float dx = magazalar[j].x - kullaniciKoordinat.x;
+            float dy = magazalar[j].y - kullaniciKoordinat.y;
             float uzaklik = sqrt(dx * dx + dy * dy);
 	    printf("%d.ci Uzaklik %.2f\n", i+1, uzaklik);
             if (uzaklik <= mesafeler[i]) {
@@ -76,7 +77,7 @@ int main() {
         printf("Mesafe %.2f icin maksimum magaza sayisi: %d\n", mesafeler[i], maksimumMagazaSayisi);
     }
 
-    free(magazeler);
+    free(magazalar);
     free(mesafeler);
 
 return 0;
